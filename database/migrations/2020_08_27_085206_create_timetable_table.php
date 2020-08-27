@@ -21,13 +21,6 @@ class CreateTimetableTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['channel_id']);
-            $table->foreign('channel_id')
-                ->references('id')
-                ->on('channels')
-                ->onDelete('cascade')
-                ->onUpdate('restrict');
-
             $table->index(['programme_id']);
             $table->foreign('programme_id')
                 ->references('id')
