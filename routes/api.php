@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'channels'],
     function() {
-        Route::get('/{channel_id}/{date}/timezone/{timezone}', ['as' => 'channels.timetable', 'uses' => 'ChannelsController@etTimetable']);
-        Route::get('/{channel_id}/programmes/{programme_id}', ['as' => 'channels.programme', 'uses' => 'ChannelsController@getProgramme']);
-        Route::get('/', ['as' => 'channels.programme', 'uses' => 'ChannelsController@index']);
+        Route::get('/{channel_id}/{date}/timezone/{timezone}', ['as' => 'channel.timetable', 'uses' => 'ChannelController@getTimetable']);
+        Route::get('/{channel_id}/programmes/{programme_id}', ['as' => 'channel.programme', 'uses' => 'ChannelController@getProgramme']);
+        Route::get('/', ['as' => 'channel', 'uses' => 'ChannelController@index']);
     });
