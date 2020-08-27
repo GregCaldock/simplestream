@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Channel\ChannelCollection;
+use App\Http\Resources\Programme\ProgrammeResource;
+use App\Http\Resources\Timetable\TimetableCollection;
 use App\Models\Channel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +22,7 @@ class ChannelController extends Controller
     {
         $channels = Channel::orderBy('name', 'asc')->get();
 
-        return Response::json(['data' => $channels]);
+        return Response::json(['data' => ChannelCollection::collection($channels)]);
     }
 
     /**
@@ -43,7 +46,7 @@ class ChannelController extends Controller
             $q->whereBetween('start_time', [$start_time, $end_time]);
         })->get()->sortBy('timetables.start_time');
 
-        return Response::json(['data' => $timetable]);
+        return Response::json(['data' => TimetableCollection::collection($timetable)]);
     }
 
     public function getProgramme(string $channel_id, string $programme_id)
@@ -58,6 +61,6 @@ class ChannelController extends Controller
             Response::json(['status' => 'error', 'message' => 'programme not found'], 404);
         }
 
-        return Response::json(['data' => $programme]);
+        return Response::json(['data' => new ProgrammeResource($programme)]);
     }
 }
