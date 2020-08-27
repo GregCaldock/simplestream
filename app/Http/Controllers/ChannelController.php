@@ -41,7 +41,7 @@ class ChannelController extends Controller
 
         $timetable = $channel->programmes()->whereHas('timetables', static function(Builder $q) use ($start_time, $end_time) {
             $q->whereBetween('start_time', [$start_time, $end_time]);
-        })->orderBy('start_time', 'asc')->get();
+        })->get()->sortBy('timetables.start_time');
 
         return Response::json(['data' => $timetable]);
     }
