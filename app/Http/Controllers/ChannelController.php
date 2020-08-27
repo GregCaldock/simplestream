@@ -26,6 +26,8 @@ class ChannelController extends Controller
     }
 
     /**
+     * Get's a channels timetable by date and timezone
+     *
      * @param string $channel_id
      * @param string $date
      * @param string $timezone
@@ -49,6 +51,13 @@ class ChannelController extends Controller
         return Response::json(['data' => TimetableCollection::collection($timetable)]);
     }
 
+    /**
+     * Get a channel's programme by id
+     *
+     * @param string $channel_id
+     * @param string $programme_id
+     * @return JsonResponse
+     */
     public function getProgramme(string $channel_id, string $programme_id)
     {
         $channel = Channel::find($channel_id);
