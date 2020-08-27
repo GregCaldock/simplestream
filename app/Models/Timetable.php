@@ -16,7 +16,7 @@ class Timetable extends Model
      *
      * @var string
      */
-    protected $table = 'programmes';
+    protected $table = 'timetables';
 
     /**
      * The attributes that are mass assignable.
