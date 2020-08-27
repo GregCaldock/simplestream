@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "4b62b506-60be-4536-bc51-880b77591bfe",
+		"name": "simplestream",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "channels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/channels/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"channels",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "timetable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/channels/bc5d298d-0eec-4bff-89c5-319ed65686c8/2020-09-02/timezone/CET",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"channels",
+						"bc5d298d-0eec-4bff-89c5-319ed65686c8",
+						"2020-09-02",
+						"timezone",
+						"CET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "programme",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/channels/bc5d298d-0eec-4bff-89c5-319ed65686c8/programmes/26d339f0-64e2-4091-84d4-088f0d94be36",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"channels",
+						"bc5d298d-0eec-4bff-89c5-319ed65686c8",
+						"programmes",
+						"26d339f0-64e2-4091-84d4-088f0d94be36"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
