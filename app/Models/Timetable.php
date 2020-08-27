@@ -28,6 +28,16 @@ class Timetable extends Model
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_time',
+        'end_time'
+    ];
+
+    /**
      * The programme the timetable entry belongs to
      *
      * @return BelongsTo
