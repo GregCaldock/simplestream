@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'channels'],
+    function() {
+        Route::get('/{channel_id}/{date}/timezone/{timezone}', ['as' => 'channels.timetable', 'uses' => 'ChannelsController@etTimetable']);
+        Route::get('/{channel_id}/programmes/{programme_id}', ['as' => 'channels.programme', 'uses' => 'ChannelsController@getProgramme']);
+        Route::get('/', ['as' => 'channels.programme', 'uses' => 'ChannelsController@index']);
+    });
