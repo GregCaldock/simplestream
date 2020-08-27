@@ -16,8 +16,8 @@ class CreateTimetableTable extends Migration
         Schema::create('timetable', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('programme_id');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
