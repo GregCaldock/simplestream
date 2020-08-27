@@ -34,7 +34,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/channels/bc5d298d-0eec-4bff-89c5-319ed65686c8/2020-09-02/timezone/CET",
+					"raw": "http://127.0.0.1:8000/channels/{{channel_id}}/2020-09-02/timezone/CET",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -45,7 +45,7 @@
 					"port": "8000",
 					"path": [
 						"channels",
-						"bc5d298d-0eec-4bff-89c5-319ed65686c8",
+						"{{channel_id}}",
 						"2020-09-02",
 						"timezone",
 						"CET"
@@ -60,7 +60,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8000/channels/bc5d298d-0eec-4bff-89c5-319ed65686c8/programmes/26d339f0-64e2-4091-84d4-088f0d94be36",
+					"raw": "http://127.0.0.1:8000/channels/{{channel_id}}/programmes/{{programme_id}}",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -71,9 +71,9 @@
 					"port": "8000",
 					"path": [
 						"channels",
-						"bc5d298d-0eec-4bff-89c5-319ed65686c8",
+						"{{channel_id}}",
 						"programmes",
-						"26d339f0-64e2-4091-84d4-088f0d94be36"
+						"{{programme_id}}"
 					]
 				}
 			},

@@ -109,10 +109,12 @@ php artisan test
 ```
 
 ### Run the Postman scripts
-The Postman scripts can be import from `simplestream.postman_collection.json` in the project root
+The Postman script collection can be import from `simplestream.postman_collection.json` in the project root
+
+The Postman Environment can be found at `simplestream.postman_environment.json`
 
 The channel, timetable and programme UUID's are generated when the database is seeded.
 
-Browse to http://127.0.0.1:8000/channels to get a channel's UUID to use.
+Use Postman to get the channels response and update the channel_id environment variable with one of the returned UUIDs.
 
-Browse to http://127.0.0.1:8000/channels/<CHANNEL_UUID>/2020-09-02/timezone/CET to get a programme's UUID to use.
+Use Postman to get the timetable response ans update the programme_id environment variable with one of the programme's UUIDs
