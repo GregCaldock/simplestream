@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProgrammesTable extends Migration
+class CreateTimetableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateProgrammesTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('programmes', function (Blueprint $table) {
+        Schema::create('timetable', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('channel_id');
-            $table->string('name');
-            $table->text('description');
-            $table->integer('duration');
+            $table->uuid('programme_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
             $table->softDeletes();
 
@@ -26,6 +25,13 @@ class CreateProgrammesTable extends Migration
             $table->foreign('channel_id')
                 ->references('id')
                 ->on('channels')
+                ->onDelete('cascade')
+                ->onUpdate('restrict');
+
+            $table->index(['programme_id']);
+            $table->foreign('programme_id')
+                ->references('id')
+                ->on('programmes')
                 ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
@@ -38,6 +44,6 @@ class CreateProgrammesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programmes');
+        Schema::dropIfExists('time_table');
     }
 }
