@@ -1,61 +1,115 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## Installing Locally
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+To install the API locally for development, you'll need to follow these steps:
 
-## About Laravel
+1. Install Homestead
+1. Clone the repo
+1. Launch Vagrant and SSH into the new instance
+1. Create the database
+1. Install dependencies
+1. Run the Database migration and seeder
+1. Start the Laravel instance
+1. Browse to the site
+1. Run the tests
+1. Use the Postman scripts
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Install Homestead
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Follow the instructions at https://laravel.com/docs/homestead.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+####DO NOT START THE VAGRANT INSTANCE JUST YET
 
-## Learning Laravel
+You'll also need to add a file and site configuration to the `Homestead.yaml` file, the following is for OSX and Linux - Windows will be mapped differently:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```yaml
+folders:
+    - map: ~/code/simplestream
+      to: /home/vagrant/code
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+sites:
+    - map: simplestream.test
+      to: /home/vagrant/code/public
+```
 
-## Laravel Sponsors
+### Clone the repo
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Create a `code` folder in your home directory, and clone the SimpleStream repo into it:
+```bash
+mkdir ~/code
+```
 
-### Premium Partners
+```bash
+cd ~/code
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+```bash
+git clone https://github.com/GregCaldock/simplestream.git
+```
 
-## Contributing
+### Launch Vagrant and SSH into the new instance
+From the root of Homestead (~/Homestead):
+```bash
+vagrant up
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+vagrant ssh
+```
+Then browse to the project root:
+```bash
+cd /home/vagrant/code
+```
 
-## Code of Conduct
+While still logged into the vagrant instance:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Create the database
 
-## Security Vulnerabilities
+Connect to the Homestead MySQL server and create a new database called `homestead` (if it doesn't exist already). 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Edit the Laravel .env file
+Edit the database settings
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=33060
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+```
 
-## License
+### Install dependencies
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install Laravel and the other app dependencies via composer:
+
+```bash
+composer install
+```
+
+### Run the Database migration and seeder
+Run the following artisan commands to set up the database
+
+```bash
+php artisan migrate
+```
+```bash
+php artisan db:seed
+```
+
+### Fire up laravel
+```bash
+php artisan serve
+```
+
+### Browse to the site
+The basic site should be available at http://127.0.0.1:8000
+
+### Run the tests
+```bash
+php artisan test
+```
+
+### Run the Postman scripts
+The Postman scripts can be import from `simplestream.postman_collection.json` in the project root
+The channel, timetable and programme UUID's are generated when the database is seeded.
+Browse to http://127.0.0.1:8000/channels to get a channel's UUID to use.
+Browse to http://127.0.0.1:8000/channels/<CHANNEL_UUID>/2020-09-02/timezone/CET to get a programme's UUID to use.
